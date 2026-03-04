@@ -12,6 +12,53 @@
         .glass-morphism { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
         .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
     </style>
+    
+    <!-- Channel Talk SDK -->
+    <script>
+      (function() {
+        var w = window;
+        if (w.ChannelIO) {
+          return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+        }
+        var ch = function() {
+          ch.c(arguments);
+        };
+        ch.q = [];
+        ch.c = function(args) {
+          ch.q.push(args);
+        };
+        w.ChannelIO = ch;
+        function l() {
+          if (w.ChannelIOInitialized) {
+            return;
+          }
+          w.ChannelIOInitialized = true;
+          var s = document.createElement('script');
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+          s.charset = 'UTF-8';
+          var x = document.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+        }
+        if (document.readyState === 'complete') {
+          l();
+        } else if (window.attachEvent) {
+          window.attachEvent('onload', l);
+        } else {
+          window.addEventListener('DOMContentLoaded', l, false);
+          window.addEventListener('load', l, false);
+        }
+      })();
+    
+      ChannelIO('boot', {
+        "pluginKey": "YOUR_PLUGIN_KEY_HERE" // 실제 채널톡 플러그인 키를 여기에 입력하세요.
+      });
+
+      function openChannelTalk() {
+        ChannelIO('showMessenger');
+      }
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-900">
 
@@ -47,8 +94,8 @@
                         기존 사용하던 폰 반납 시 최대 보상, 제휴 카드 할인까지 더해<br class="hidden md:block" /> 대한민국 최저가 도전에 나섭니다.
                     </p>
                     <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
-                        <a href="#apply" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-xl transition-all transform hover:-translate-y-1">지금 최저가 확인하기</a>
-                        <a href="#models" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold text-lg backdrop-blur-sm transition-all border border-white/20">모델 둘러보기</a>
+                        <button onclick="openChannelTalk()" class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-lg shadow-xl transition-all transform hover:-translate-y-1 text-center">지금 실시간 상담하기</button>
+                        <a href="#models" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white rounded-xl font-bold text-lg backdrop-blur-sm transition-all border border-white/20 text-center">모델 둘러보기</a>
                     </div>
                 </div>
                 <div class="relative flex justify-center items-center">
@@ -132,7 +179,7 @@
                             <span class="text-2xl font-black text-blue-600">월 34,200원~</span>
                             <span class="text-sm text-gray-400 line-through">58,000원</span>
                         </div>
-                        <a href="#apply" class="block w-full text-center py-3 bg-gray-900 text-white font-bold rounded-xl hover:bg-blue-600 transition">가격 문의하기</a>
+                        <button onclick="openChannelTalk()" class="block w-full text-center py-3 bg-gray-900 text-white font-bold rounded-xl hover:bg-blue-600 transition">실시간 가격 문의</button>
                     </div>
                 </div>
                 <!-- Product Card 2 -->
@@ -152,7 +199,7 @@
                             <span class="text-2xl font-black text-blue-600">월 41,500원~</span>
                             <span class="text-sm text-gray-400 line-through">62,000원</span>
                         </div>
-                        <a href="#apply" class="block w-full text-center py-3 bg-gray-900 text-white font-bold rounded-xl hover:bg-blue-600 transition">가격 문의하기</a>
+                        <button onclick="openChannelTalk()" class="block w-full text-center py-3 bg-gray-900 text-white font-bold rounded-xl hover:bg-blue-600 transition">실시간 가격 문의</button>
                     </div>
                 </div>
                 <!-- Product Card 3 -->
@@ -172,7 +219,7 @@
                             <span class="text-2xl font-black text-blue-600">월 19,800원~</span>
                             <span class="text-sm text-gray-400 line-through">45,000원</span>
                         </div>
-                        <a href="#apply" class="block w-full text-center py-3 bg-gray-900 text-white font-bold rounded-xl hover:bg-blue-600 transition">가격 문의하기</a>
+                        <button onclick="openChannelTalk()" class="block w-full text-center py-3 bg-gray-900 text-white font-bold rounded-xl hover:bg-blue-600 transition">실시간 가격 문의</button>
                     </div>
                 </div>
             </div>
